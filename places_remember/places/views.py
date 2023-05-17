@@ -8,7 +8,10 @@ def home(request):
 
 
 def google_login(request):
-    pass
+    """
+    google login page
+    """
+    return render(request, 'account/google_login.html')
 
 
 def vk_login(request):
