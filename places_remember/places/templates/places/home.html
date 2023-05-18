@@ -12,9 +12,7 @@
   {% else %}
     <h1>Welcome to our "Places Remember" service!</h1>
   {% endif %}
-
   <p>Here you can store your impressions of the places you visit.</p>
-
   {% if firstname or request.user.username %}
     <form action="{% url 'logout' %}" method="post">
         {% csrf_token %}
