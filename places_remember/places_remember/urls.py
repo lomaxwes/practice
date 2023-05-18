@@ -19,7 +19,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('places.urls')),
-    path('accounts/', include('allauth.urls')),
+    path('', include('places.urls')),  # connecting the url from the places app
+    path('accounts/', include('allauth.urls')),  # "Include URL patterns for the allauth application."
     path('social-auth/', include('social_django.urls', namespace='social')),
+    # "Include URL patterns for social authentication using the social_django library."
 ]
