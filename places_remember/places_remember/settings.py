@@ -155,3 +155,5 @@ SOCIAL_AUTH_PROVIDERS = {
 LOGIN_REDIRECT_URL = '/account/login-success'
 
 LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000/'
+
+APPEND_SLASH = False
