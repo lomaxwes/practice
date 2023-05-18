@@ -5,15 +5,29 @@
     <title>Brief description of the service</title>
 </head>
 <body>
-  <h1>Welcome to our Places Remember service!</h1>
+  {% if firstname %}
+    <h1>Welcome {{ firstname }} to our "Places Remember" service!</h1>
+  {% elif request.user.username %}
+    <h1>Welcome {{ request.user.username }} to our "Places Remember" service!</h1>
+  {% else %}
+    <h1>Welcome to our "Places Remember" service!</h1>
+  {% endif %}
+
   <p>Here you can store your impressions of the places you visit.</p>
 
-        <form action="{% url 'google_login' %}">
-  <button class="btn btn-primary" type="submit">Log in using Google</button>
-</form>
+  {% if firstname or request.user.username %}
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-primary" type="submit">Log out</button>
+    </form>
+  {% else %}
+    <form action="{% url 'google_login' %}">
+        <button class="btn btn-primary" type="submit">Log in using Google</button>
+    </form>
 
-<form action="{% url 'vk_login' %}">
-  <button class="btn btn-primary" type="submit">Log in using VK</button>
-</form>
+    <form action="{% url 'vk_login' %}">
+        <button class="btn btn-primary" type="submit">Log in using VK</button>
+    </form>
+  {% endif %}
 </body>
 </html>

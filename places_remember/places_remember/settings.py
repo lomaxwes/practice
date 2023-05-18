@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from .secrets import CLIENT_ID, SECRET, DJANGO_KEY
+from .secrets import CLIENT_ID_GOOGLE, SECRET_GOOGLE, DJANGO_KEY, CLIENT_SECRET_VK, CLIENT_ID_VK
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,6 +41,11 @@ INSTALLED_APPS = [
     'places',
     'allauth',
     'allauth.socialaccount',
+    'social_django',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.vk',
+    'allauth.account',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -131,12 +136,22 @@ AUTHENTICATION_BACKENDS = [
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'APP': {
-            'client_id': CLIENT_ID,
-            'secret': SECRET,
+            'client_id': CLIENT_ID_GOOGLE,
+            'secret': SECRET_GOOGLE,
             'key': ''
         }
     }
 }
 
+SOCIAL_AUTH_PROVIDERS = {
+    'vk': {
+        'APP': {
+            'client_id': CLIENT_ID_VK,
+            'secret': CLIENT_SECRET_VK,
+        }
+    }
+}
 
+LOGIN_REDIRECT_URL = '/account/login-success'
 
+LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000/'
