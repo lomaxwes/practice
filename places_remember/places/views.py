@@ -5,14 +5,14 @@ from .models import User
 
 # Create your views here.
 def home(request):
-    # Preparing data for transmission to the template, for example, the user name
+    # Preparing data for transmission to the template
     user = request.user
     firstname = user.first_name if user.is_authenticated else None
     return render(request, 'places/home.html', {'firstname': firstname})
 
 
 def login_success(request):
-    # Preparing data for transmission to the template, for example, the user name
+    # Preparing data for transmission to the template
     user = request.user
     firstname = user.first_name
     return render(request, 'account/login_success.html', {'firstname': firstname})
