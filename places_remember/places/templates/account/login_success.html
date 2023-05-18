@@ -11,5 +11,9 @@
         <h1>Welcome, {{ request.user.username }}!</h1>
     {% endif %}
     <p>Login successful. Additional content here...</p>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-primary" type="submit">Log out</button>
+    </form>
 </body>
 </html>
