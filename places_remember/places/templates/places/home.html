@@ -1,24 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Brief description of the service</title>
-</head>
-<body>
-  {% if firstname %}
+{% extends 'base.html' %}
+
+{% block title %}Brief description of the service{% endblock %}
+
+{% block content %}
+{% if firstname %}
     <h1>Welcome {{ firstname }} to our "Places Remember" service!</h1>
-  {% elif request.user.username %}
+{% elif request.user.username %}
     <h1>Welcome {{ request.user.username }} to our "Places Remember" service!</h1>
-  {% else %}
+{% else %}
     <h1>Welcome to our "Places Remember" service!</h1>
-  {% endif %}
-  <p>Here you can store your impressions of the places you visit.</p>
-  {% if firstname or request.user.username %}
+{% endif %}
+
+<p>Here you can store your impressions of the places you visit.</p>
+
+{% if firstname or request.user.username %}
     <form action="{% url 'logout' %}" method="post">
         {% csrf_token %}
         <button class="btn btn-primary" type="submit">Log out</button>
     </form>
-  {% else %}
+    <form action="{% url 'add_memory' %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-primary" type="submit">Add a memory</button>
+    </form>
+    {% if memories %}
+    <h2>My Memories</h2>
+    <ul>
+        {% for memory in memories %}
+        <li>{{ memory.name }} - {{ memory.comment }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>You don't have any memories yet.</p>
+    {% endif %}
+{% else %}
     <form action="{% url 'google_login' %}">
         <button class="btn btn-primary" type="submit">Log in using Google</button>
     </form>
@@ -26,6 +40,7 @@
     <form action="{% url 'vk_login' %}">
         <button class="btn btn-primary" type="submit">Log in using VK</button>
     </form>
-  {% endif %}
-</body>
-</html>
+{% endif %}
+{% endblock %}
+
+
