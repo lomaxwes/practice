@@ -63,7 +63,9 @@ ROOT_URLCONF = 'places_remember.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -134,14 +136,32 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SOCIALACCOUNT_PROVIDERS = {
-    'google': {
+    'vk': {
         'APP': {
-            'client_id': CLIENT_ID_GOOGLE,
-            'secret': SECRET_GOOGLE,
-            'key': ''
-        }
-    }
+            'client_id': CLIENT_ID_VK,
+            'secret': CLIENT_SECRET_VK,
+        },
+        'AUTH_PARAMS': {
+            'response_type': 'code',
+        },
+        'SCOPE': ['email'],
+        'METHOD': 'oauth2',
+        'VERIFIED_EMAIL': False,
+        'ADDITIONAL_USER_FIELDS': ['first_name', 'last_name'],
+        'ADAPTER': 'allauth.socialaccount.providers.vk.adapter.VKOAuth2Adapter',
+    },
 }
+
+
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'APP': {
+#             'client_id': CLIENT_ID_GOOGLE,
+#             'secret': SECRET_GOOGLE,
+#             'key': ''
+#         }
+#     }
+# }
 
 SOCIAL_AUTH_PROVIDERS = {
     'vk': {
@@ -155,5 +175,3 @@ SOCIAL_AUTH_PROVIDERS = {
 LOGIN_REDIRECT_URL = '/account/login-success'
 
 LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000/'
-
-APPEND_SLASH = False
