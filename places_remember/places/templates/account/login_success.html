@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login Success</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+
+{% block title %} Login Success {% endblock %}</title>
+
+{% block content %}
     {% if firstname %}
         <h1>Welcome, {{ firstname }}!</h1>
     {% else %}
@@ -15,5 +14,11 @@
         {% csrf_token %}
         <button class="btn btn-primary" type="submit">Log out</button>
     </form>
-</body>
-</html>
+    <div align="center">
+        <h1>You don't have any memories</h1>
+        <form action="{% url 'add_memory' %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-primary" type="submit">Add a memory</button>
+    </form>
+    </div>
+{% endblock %}
