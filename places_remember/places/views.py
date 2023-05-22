@@ -1,10 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from allauth.socialaccount.signals import social_account_added
-from django.dispatch import receiver
-from allauth.account.models import EmailAddress
-from django.contrib.sites import requests
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login
 from .models import Place, User, UserProfile
 from .forms import MemoryForm
 
@@ -21,10 +17,11 @@ def home(request):
         return render(request, 'places/home.html', {'firstname': firstname})
 
 
+@login_required
 def login_success(request):
     # Preparing data for transmission to the template
     user = request.user
-    firstname = user.first_name
+    firstname = user.first_name if user.is_authenticated else None
     return render(request, 'account/login_success.html', {'firstname': firstname})
 
 
