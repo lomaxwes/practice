@@ -10,14 +10,11 @@
         <h1>Welcome, {{ request.user.username }}!</h1>
     {% endif %}
     <p>Login successful.</p>
-    <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
+    <form action="{% url 'logout' %}" method="get">
         <button class="btn btn-primary" type="submit">Log out</button>
     </form>
-
         <h1>You don't have any memories</h1>
-        <form action="{% url 'add_memory' %}" method="post">
-        {% csrf_token %}
+        <form action="{% url 'add_memory' %}" method="get">
         <button class="btn btn-primary" type="submit">Add a memory</button>
     </form>
 
