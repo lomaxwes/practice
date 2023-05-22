@@ -3,11 +3,11 @@
 {% block title %}Add Memory{% endblock %}
 
 {% block content %}
-<div align="center">
+<br>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Save</button>
+        <button class="btn btn-primary" type="submit">Save</button>
     </form>
-</div>
 {% endblock %}
+
