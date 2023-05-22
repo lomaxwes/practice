@@ -18,17 +18,18 @@
         {% csrf_token %}
         <button class="btn btn-primary" type="submit">Log out</button>
     </form>
+        <br>
     <form action="{% url 'add_memory' %}" method="post">
         {% csrf_token %}
         <button class="btn btn-primary" type="submit">Add a memory</button>
     </form>
     {% if memories %}
-    <h2>My Memories</h2>
-    <ul>
+    <h2>My Memories:</h2>
+
         {% for memory in memories %}
         <li>{{ memory.name }} - {{ memory.comment }}</li>
         {% endfor %}
-    </ul>
+
     {% else %}
     <p>You don't have any memories yet.</p>
     {% endif %}
@@ -36,7 +37,7 @@
     <form action="{% url 'google_login' %}">
         <button class="btn btn-primary" type="submit">Log in using Google</button>
     </form>
-
+        <br>
     <form action="{% url 'vk_login' %}">
         <button class="btn btn-primary" type="submit">Log in using VK</button>
     </form>
