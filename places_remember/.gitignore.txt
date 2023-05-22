@@ -2,6 +2,12 @@
 /shelf/
 /workspace.xml
 /.idea
+*~
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
 
 # Environments
 .env
@@ -12,6 +18,7 @@ ENV/
 env.bak/
 venv.bak/
 secrets.py
+.idea/
 
 *.pyc
 __pycache__/
