@@ -3,38 +3,47 @@
 {% block title %}Add Memory{% endblock %}
 
 {% block content %}
-<br>
-<form method="post">
-    {% csrf_token %}
-    <div id="map" style="width: 100%; height: 800px;"></div>
     <br>
-    <input type="hidden" id="location" name="location">
-    <label for="name">{{ form.name.label }}</label>
-    <input type="text" id="name" name="name">
-    <label for="comment">{{ form.comment.label }}</label>
-    <textarea id="comment" name="comment"></textarea>
-    <button class="btn btn-primary" type="submit">Save</button>
-</form>
+    <form method="post">
+        {% csrf_token %}
+        <div id="map" style="width: 100%; height: 800px;"></div>
+        <br>
+        <input type="hidden" id="location" name="location">
+        <label for="name">{{ form.name.label }}</label>
+        <input type="text" id="name" name="name">
+        <label for="comment">{{ form.comment.label }}</label>
+        <textarea id="comment" name="comment"></textarea>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </form>
 
-<script src='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js'></script>
-<link href='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet' />
-<script>
-    mapboxgl.accessToken = '{{ mapbox_access_token }}';
-    var map = new mapboxgl.Map({
-        container: 'map', // container ID
-        style: 'mapbox://styles/mapbox/streets-v11', // style URL
-        center: [60.6057, 56.8389],  // starting position Yekaterinburg [lng, lat]
-        zoom: 9  // starting zoom
-    });
+    {% if error_messages %}
+        <ul class="errorlist">
+            {% for message in error_messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
-    map.on('click', function(e) {
-        var locationField = document.getElementById('location');
-        locationField.value = e.lngLat.lng + ',' + e.lngLat.lat;
-        var marker = new mapboxgl.Marker()
-            .setLngLat(e.lngLat)
-            .addTo(map);
-    });
-</script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet' />
+    <script>
+        mapboxgl.accessToken = '{{ mapbox_access_token }}';
+        var map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/streets-v11', // style URL
+            center: [60.6057, 56.8389],  // starting position Yekaterinburg [lng, lat]
+            zoom: 9  // starting zoom
+        });
+
+        map.on('click', function(e) {
+            var locationField = document.getElementById('location');
+            locationField.value = e.lngLat.lng + ',' + e.lngLat.lat;
+            var marker = new mapboxgl.Marker()
+                .setLngLat(e.lngLat)
+                .addTo(map);
+        });
+    </script>
 {% endblock %}
+
 
 
