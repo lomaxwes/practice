@@ -1,4 +1,3 @@
-
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import logout, login
@@ -49,8 +48,12 @@ def add_memory(request):
             return redirect('home')
     else:
         form = MemoryForm()
-
-    return render(request, 'places/add_memory.html', {'form': form})
+        mapbox_access_token = settings.MAPBOX_ACCESS_TOKEN
+        context = {
+            'form': form,
+            'mapbox_access_token': mapbox_access_token
+        }
+    return render(request, 'places/add_memory.html', context)
 
 
 def memory_list(request):
