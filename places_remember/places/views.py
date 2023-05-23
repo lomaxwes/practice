@@ -48,11 +48,14 @@ def add_memory(request):
             return redirect('home')
     else:
         form = MemoryForm()
-        mapbox_access_token = settings.MAPBOX_ACCESS_TOKEN
-        context = {
-            'form': form,
-            'mapbox_access_token': mapbox_access_token
+    mapbox_access_token = settings.MAPBOX_ACCESS_TOKEN
+    context = {
+        'form': form,
+        'mapbox_access_token': mapbox_access_token
         }
+    if form.errors:
+        error_messages = form.errors.values()
+        context['error_messages'] = error_messages
     return render(request, 'places/add_memory.html', context)
 
 
