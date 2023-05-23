@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Brief description of the service{% endblock %}
+{% block title %}Places Remember{% endblock %}
 
 {% block content %}
 {% if firstname %}
@@ -8,22 +8,21 @@
 {% elif request.user.username %}
     <h1>Welcome {{ request.user.username }} to our "Places Remember" service!</h1>
 {% else %}
-    <h1>Welcome to our "Places Remember" service!</h1>
+    <h1>Welcome to "Places Remember" service!</h1>
 {% endif %}
 
-<p>Here you can store your impressions of the places you visit.</p>
+<p><h1>Here you can store your impressions of the places you visit.</h1></p>
 
 {% if firstname or request.user.username %}
-    <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
+    <form action="{% url 'logout' %}" method="get">
         <button class="btn btn-primary" type="submit">Log out</button>
     </form>
         <br>
-    <form action="{% url 'add_memory' %}" method="post">
-        {% csrf_token %}
+    <form action="{% url 'add_memory' %}" method="get">
         <button class="btn btn-primary" type="submit">Add a memory</button>
     </form>
     {% if memories %}
+        <br>
     <h2>My Memories:</h2>
 
         {% for memory in memories %}
@@ -31,6 +30,7 @@
         {% endfor %}
 
     {% else %}
+    <br>
     <p>You don't have any memories yet.</p>
     {% endif %}
 {% else %}
