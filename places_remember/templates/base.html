@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Places Remember</title>
+        <title>{% block title %} {% endblock %}</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -22,6 +22,7 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'add_memory' %}">Add memory</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'map' %}">Map</a></li>
                         {% if user.is_authenticated %}
                             <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Log out</a></li>
                         {% else %}
