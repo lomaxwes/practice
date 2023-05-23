@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 from .secrets import CLIENT_ID_GOOGLE, SECRET_GOOGLE, DJANGO_KEY, CLIENT_SECRET_VK, CLIENT_ID_VK
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.vk',
     'allauth.account',
     'django_extensions',
+    'mapbox_location_field',
 ]
 
 MIDDLEWARE = [
@@ -176,3 +178,6 @@ SOCIAL_AUTH_PROVIDERS = {
 LOGIN_REDIRECT_URL = '/account/login-success'
 
 LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000/'
+
+
+MAPBOX_ACCESS_TOKEN = config('MAPBOX_ACCESS_TOKEN')
