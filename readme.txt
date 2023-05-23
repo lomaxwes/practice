@@ -1,12 +1,6 @@
-Возникли вопросы при выполнении следующих задач:
-1. Не реализовал получение данных (фото, эл.почта) из соц сети.
-Соответственно нет проверки пользователя по эл.почте, что необходимо
-для проверки пользователя при авторизации Google/VK (исключение дублей).
-
-
 Приложение Places Remember на стадии разработки в целях обучения!
-
 The Places Remember application is currently under development for educational purposes.
+
 
 Task description:
 The user visits the website and sees a page with a brief description
