@@ -7,4 +7,5 @@ urlpatterns = [
     path('account/login-success', views.login_success, name='login_success'),  # user is authenticated
     path('logout/', views.logout_view, name='logout'),  # logout
     path('add_memory/', views.add_memory, name='add_memory'),  # add_memory
+    path('map/', views.default_map, name='map')  # map
 ]
