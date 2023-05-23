@@ -1,11 +1,18 @@
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import logout, login
 from .models import Place, User, UserProfile
 from .forms import MemoryForm
+from django.conf import settings
 
 
 # Create your views here.
+def default_map(request):
+    mapbox_access_token = settings.MAPBOX_ACCESS_TOKEN
+    return render(request, 'places/map.html', {'mapbox_access_token': mapbox_access_token})
+
+
 def home(request):
     # Preparing data for transmission to the template
     user = request.user
@@ -33,13 +40,12 @@ def logout_view(request):
 
 @login_required
 def add_memory(request):
-    # output of the form for adding memories
     if request.method == 'POST':
         form = MemoryForm(request.POST)
         if form.is_valid():
-            memory = form.save(commit=False)
-            memory.user = request.user
-            memory.save()
+            place = form.save(commit=False)
+            place.user = request.user  # Assign the current user to the user field
+            place.save()
             return redirect('home')
     else:
         form = MemoryForm()
